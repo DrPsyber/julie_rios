@@ -32,6 +32,15 @@ export const SITE_CONTENT: SiteContent = {
     email: "roundsashley@gmail.com",
   },
   experience: [
+    {
+      company: "Ashley Rounds Designs",
+      position: "Designer",
+      startDate: "January 2003",
+      endDate: "Present",
+      summary: [
+        "My experience will be described here in the near future",
+      ],
+    },
     // {
     //   company: "Zalmart",
     //   position: "Lead Android Developer",
