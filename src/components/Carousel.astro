@@ -8,10 +8,14 @@ interface Props {
 }
 
 const { photos, items_per_slide = 1 } = Astro.props;
+
+// Generate random tilts for each photo (between 5 and 30 degrees, random direction)
+const tilts = photos.map(() => (Math.random() > 0.5 ? 1 : -1) * (Math.random() * 25 + 5));
 ---
 
+
 <div
-  class="relative overflow-hidden rounded-2xl border border-neutral/20"
+  class="relative"
   id="carousel"
   data-items-per-slide={items_per_slide}
   aria-roledescription="carousel"
@@ -19,28 +23,37 @@ const { photos, items_per_slide = 1 } = Astro.props;
 >
   <!-- Track -->
   <div
-    class="flex transition-transform duration-500 ease-in-out"
+    class="flex transition-transform duration-700 ease-in-out py-20"
     id="carousel-track"
     aria-live="polite"
   >
+
+
     {
       photos.map((photo, i) => (
         <div
-          class="relative shrink-0"
+          class="carousel-slide relative shrink-0 transition-all duration-700 ease-in-out"
           style={`width: ${100 / items_per_slide}%`}
           role="group"
+          data-tilt={tilts[i]}
           aria-roledescription="slide"
           aria-label={`${i + 1} of ${photos.length}: ${photo.title}`}
         >
-          <a href={`/gallery/${photo.slug}`} tabindex={i === 0 ? "0" : "-1"}>
-            <Image
-              src={photo.image}
-              alt={photo.title}
-              width={800}
-              height={500}
-              class="h-72 w-full object-cover sm:h-80 md:h-96"
-            />
-            <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent" />
+          <a
+            href={`/gallery/${photo.slug}`}
+            tabindex={i === 0 ? "0" : "-1"}
+            class="carousel-content block transition-all duration-700 ease-in-out origin-center"
+          >
+            <div class="relative overflow-hidden rounded-xl shadow-2xl">
+              <Image
+                src={photo.image}
+                alt={photo.title}
+                width={800}
+                height={500}
+                class="h-72 w-full object-cover sm:h-80 md:h-96"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent" />
+            </div>
             <div class="absolute bottom-6 left-6 right-16">
               {photo.category && (
                 <span class="mb-2 inline-block rounded-full bg-primary/90 px-3 py-1 text-xs font-medium text-white">
@@ -58,6 +71,7 @@ const { photos, items_per_slide = 1 } = Astro.props;
         </div>
       ))
     }
+
   </div>
 
   <!-- Prev button -->
@@ -114,7 +128,7 @@ const { photos, items_per_slide = 1 } = Astro.props;
     aria-label="Slide indicators"
   >
     {
-      photos.slice(0, Math.max(1, photos.length - (items_per_slide - 1))).map((photo, i) => (
+      photos.map((photo, i) => (
         <button
           type="button"
           role="tab"
@@ -126,6 +140,7 @@ const { photos, items_per_slide = 1 } = Astro.props;
       ))
     }
   </div>
+
 </div>
 
 <script>
@@ -147,14 +162,43 @@ const { photos, items_per_slide = 1 } = Astro.props;
 
   function goTo(index: number) {
     const totalSlides = slides.length;
-    // Prevent scrolling past the last visible item
-    const maxIndex = Math.max(0, totalSlides - itemsPerSlide);
     
     current = index;
-    if (current < 0) current = maxIndex;
-    if (current > maxIndex) current = 0;
+    if (current < 0) current = totalSlides - 1;
+    if (current >= totalSlides) current = 0;
 
-    track.style.transform = `translateX(-${current * (100 / itemsPerSlide)}%)`;
+    // Center the active slide
+    const slideWidthPercent = 100 / itemsPerSlide;
+    const centerOffset = (itemsPerSlide - 1) / 2;
+    const targetTranslate = -(current - centerOffset) * slideWidthPercent;
+    track.style.transform = `translateX(${targetTranslate}%)`;
+
+    // Update individual slide styles
+    slides.forEach((slide, i) => {
+      const slideEl = slide as HTMLElement;
+      const content = slideEl.querySelector(".carousel-content") as HTMLElement;
+      const isActive = i === current;
+      const tilt = slideEl.dataset.tilt;
+      
+      // Calculate distance from currently selected slide
+      const distance = Math.abs(i - current);
+      
+      if (isActive) {
+        content.style.transform = "scale(1) rotate(0deg)";
+        slideEl.style.opacity = "1";
+        slideEl.style.zIndex = "20";
+        slideEl.classList.remove("pointer-events-none");
+      } else {
+        content.style.transform = `scale(0.8) rotate(${tilt}deg)`;
+        
+        // Decrease opacity symmetrically as it gets further from the selected slide
+        const opacity = Math.max(0.05, 1 - distance * 0.35);
+        slideEl.style.opacity = String(opacity);
+        slideEl.style.zIndex = String(10 - distance);
+        slideEl.classList.add("pointer-events-none");
+      }
+    });
+
 
     dots.forEach((dot, i) => {
       const active = i === current;
@@ -169,6 +213,10 @@ const { photos, items_per_slide = 1 } = Astro.props;
       link.setAttribute("tabindex", i === current ? "0" : "-1");
     });
   }
+
+  // Initial call to set styles
+  goTo(0);
+
 
   function startAutoplay() {
     autoplayTimer = setInterval(() => goTo(current + 1), 4000);

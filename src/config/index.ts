@@ -73,7 +73,7 @@ export const SITE_CONTENT: SiteContent = {
     //     "Developed and integrated a real-time vehicle tracking system using WebSockets, improving accuracy and data update in the application. This functionality increased user satisfaction by 30% and reduced customer service inquiries by 25%.",
     // },
   ],
-  // projects: [
+  projects: [
     // {
     //   name: "Spotifu Music",
     //   summary: "A music streaming app that emulates Spotify's core features.",
@@ -95,7 +95,7 @@ export const SITE_CONTENT: SiteContent = {
     //   linkSource: "https://github.com/immois/astro-zen",
     //   image: "/clone-ig.png",
     // },
-  //],
+  ],
   about: {
     description: `
       Hi, I’m Ashley Rounds, a passionate floral designer with a knack for crafting beautiful floral arrangements. 
