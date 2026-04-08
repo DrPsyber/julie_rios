@@ -45,7 +45,7 @@ const tilts = photos.map(() => (Math.random() > 0.5 ? 1 : -1) * (Math.random() *
             tabindex={i === 0 ? "0" : "-1"}
             class="carousel-content block transition-all duration-700 ease-in-out origin-center bg-white p-4 pb-20 shadow-2xl rounded-sm max-w-lg mx-auto"
           >
-            <div class="relative overflow-hidden aspect-[4/5] bg-neutral-100">
+            <div class="relative overflow-hidden aspect-square bg-neutral-100">
 
               <Image
                 src={photo.image}
