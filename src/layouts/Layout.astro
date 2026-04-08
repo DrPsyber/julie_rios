@@ -5,6 +5,12 @@ import "@fontsource-variable/gabarito";
 import { SITE_CONFIG } from "@config";
 import Footer from "@components/Footer.astro";
 
+interface Props {
+  wide?: boolean;
+}
+
+const { wide = false } = Astro.props;
+
 const {
   title,
   description,
@@ -44,7 +50,7 @@ const ogImgUrl = canonicalURL + socialImage;
   </head>
   <body class="bg-black font-sans">
     <Header siteLogo={siteLogo} navLinks={navLinks} />
-    <main class="mx-auto max-w-3xl px-5">
+    <main class={`mx-auto ${wide ? "max-w-5xl" : "max-w-3xl"} px-5`}>
       <slot />
     </main>
     <Footer author={author} socialLinks={socialLinks} />

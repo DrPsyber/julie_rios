@@ -1,0 +1,55 @@
+---
+import { Image } from "astro:assets";
+import type { PhotoProps } from "@types";
+
+interface Props {
+  photos: PhotoProps[];
+}
+
+const { photos } = Astro.props;
+---
+
+<ul
+  class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3"
+  aria-label="Photo gallery"
+>
+  {
+    photos.map((photo) => (
+      <li>
+        <a
+          href={`/gallery/${photo.slug}`}
+          class="group relative block overflow-hidden rounded-xl border border-neutral/20 bg-black transition-all duration-300 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+          aria-label={`View ${photo.title}${photo.category ? ` — ${photo.category}` : ""}`}
+        >
+          <div class="overflow-hidden">
+            <Image
+              src={photo.image}
+              alt={photo.title}
+              width={400}
+              height={300}
+              class="h-60 w-full object-cover transition-transform duration-500 group-hover:scale-105"
+            />
+          </div>
+
+          <!-- Always-visible bottom strip -->
+          <div class="border-t border-neutral/10 px-4 py-3">
+            {photo.category && (
+              <span class="text-xs font-medium text-primary">
+                {photo.category}
+              </span>
+            )}
+            <p class="font-serif text-base font-semibold text-white">
+              {photo.title}
+            </p>
+            {photo.date && (
+              <p class="mt-0.5 text-xs text-neutral/70">{photo.date}</p>
+            )}
+          </div>
+
+          <!-- Hover overlay -->
+          <div class="pointer-events-none absolute inset-0 rounded-xl opacity-0 ring-2 ring-primary transition-opacity duration-300 group-hover:opacity-100" />
+        </a>
+      </li>
+    ))
+  }
+</ul>
