@@ -7,7 +7,7 @@ interface Props {
   items_per_slide?: number;
 }
 
-const { photos, items_per_slide = 1 } = Astro.props;
+const { photos, items_per_slide = 7 } = Astro.props;
 
 // Generate random tilts for each photo (between 1 and 10 degrees, random direction)
 const tilts = photos.map(() => (Math.random() > 0.5 ? 1 : -1) * (Math.random() * 9 + 1));
@@ -50,8 +50,8 @@ const tilts = photos.map(() => (Math.random() > 0.5 ? 1 : -1) * (Math.random() *
               <Image
                 src={photo.image}
                 alt={photo.title}
-                width={100}
-                height={100}
+                width={400}
+                height={400}
                 class="h-full w-full object-cover"
               />
             </div>
@@ -189,7 +189,7 @@ const tilts = photos.map(() => (Math.random() > 0.5 ? 1 : -1) * (Math.random() *
         content.style.transform = `scale(0.8) rotate(${tilt}deg)`;
         
         // Decrease opacity symmetrically as it gets further from the selected slide
-        const opacity = Math.max(0.05, 1 - distance * 0.35);
+        const opacity = Math.max(0.1, 1 - distance * 0.15);
         slideEl.style.opacity = String(opacity);
         slideEl.style.zIndex = String(10 - distance);
         slideEl.classList.add("pointer-events-none");
