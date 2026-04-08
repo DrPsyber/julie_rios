@@ -4,14 +4,16 @@ import type { PhotoProps } from "@types";
 
 interface Props {
   photos: PhotoProps[];
+  items_per_slide?: number;
 }
 
-const { photos } = Astro.props;
+const { photos, items_per_slide = 1 } = Astro.props;
 ---
 
 <div
   class="relative overflow-hidden rounded-2xl border border-neutral/20"
   id="carousel"
+  data-items-per-slide={items_per_slide}
   aria-roledescription="carousel"
   aria-label="Photo gallery carousel"
 >
@@ -24,7 +26,8 @@ const { photos } = Astro.props;
     {
       photos.map((photo, i) => (
         <div
-          class="relative min-w-full"
+          class="relative shrink-0"
+          style={`width: ${100 / items_per_slide}%`}
           role="group"
           aria-roledescription="slide"
           aria-label={`${i + 1} of ${photos.length}: ${photo.title}`}
@@ -111,7 +114,7 @@ const { photos } = Astro.props;
     aria-label="Slide indicators"
   >
     {
-      photos.map((photo, i) => (
+      photos.slice(0, Math.max(1, photos.length - (items_per_slide - 1))).map((photo, i) => (
         <button
           type="button"
           role="tab"
@@ -137,12 +140,21 @@ const { photos } = Astro.props;
   const slideLinks =
     track.querySelectorAll<HTMLAnchorElement>("a[tabindex]");
 
+  const itemsPerSlide = Number(carousel.dataset.itemsPerSlide) || 1;
+
   let current = 0;
   let autoplayTimer: ReturnType<typeof setInterval> | undefined;
 
   function goTo(index: number) {
-    current = ((index % slides.length) + slides.length) % slides.length;
-    track.style.transform = `translateX(-${current * 100}%)`;
+    const totalSlides = slides.length;
+    // Prevent scrolling past the last visible item
+    const maxIndex = Math.max(0, totalSlides - itemsPerSlide);
+    
+    current = index;
+    if (current < 0) current = maxIndex;
+    if (current > maxIndex) current = 0;
+
+    track.style.transform = `translateX(-${current * (100 / itemsPerSlide)}%)`;
 
     dots.forEach((dot, i) => {
       const active = i === current;

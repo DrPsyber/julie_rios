@@ -1,8 +1,8 @@
-# AstroZen - Personal Portfolio Website
+# `Ashley Rounds - Floral Designer` Website
 
-AstroZen is a minimalist, accessible and responsive portfolio template for your personal portfolio website. It is built with Astro and TailwindCSS.
+This is a website for Ashley Rounds, a floral designer based in Dallas, Texas. It is built with Astro and TailwindCSS.
 
-![zen-og](https://github.com/user-attachments/assets/7a72aaae-6652-4cd0-becc-8e6a3c224993)
+![zen-og](/public/zen-og.jpeg)
 
 > [!NOTE]
 > The information contained in this template, including names, images, and content, is entirely fictitious and is intended solely to give the design a realistic appearance. Any coincidence with real-life people, events, or situations is purely coincidental. It is recommended that you replace this information with your own information.
