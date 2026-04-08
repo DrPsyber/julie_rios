@@ -1,5 +1,6 @@
 import type { SiteConfig, SiteContent } from "../types";
 
+
 export const SITE_CONFIG: SiteConfig = {
   title: "Ashley Rounds - Designer",
   author: "Ashley Rounds",
@@ -10,6 +11,7 @@ export const SITE_CONFIG: SiteConfig = {
   navLinks: [
     { text: "Experience", href: "#experience" },
     { text: "Projects", href: "#projects" },
+    { text: "Gallery", href: "/gallery" },
     { text: "About", href: "#about" },
   ],
   socialLinks: [
@@ -100,6 +102,62 @@ export const SITE_CONTENT: SiteContent = {
     `,
     image: "/ashleyrounds_big.jpg",
   },
+  photos: [
+    {
+      slug: "spring-centerpiece",
+      title: "Spring Centerpiece",
+      image: "/ashleyrounds_big.jpg",
+      category: "Centerpieces",
+      date: "March 2024",
+      description:
+        "A lush spring centerpiece featuring peonies, garden roses, and seasonal greenery — perfect for a bridal shower or intimate dinner party.",
+    },
+    {
+      slug: "garden-bouquet",
+      title: "Garden Bouquet",
+      image: "/alejandro-big.jpg",
+      category: "Bouquets",
+      date: "February 2024",
+      description:
+        "A romantic hand-tied garden bouquet with soft blush ranunculus, dusty miller, and trailing jasmine vine.",
+    },
+    {
+      slug: "wedding-arch",
+      title: "Wedding Arch",
+      image: "/ashleyrounds_big.jpg",
+      category: "Installations",
+      date: "January 2024",
+      description:
+        "A sweeping floral arch adorned with white orchids, eucalyptus, and garden roses for an outdoor ceremony backdrop.",
+    },
+    {
+      slug: "tablescape",
+      title: "Botanical Tablescape",
+      image: "/alejandro-big.jpg",
+      category: "Tablescapes",
+      date: "December 2023",
+      description:
+        "A richly layered holiday tablescape with deep burgundy dahlias, cedar boughs, and candlelit votives.",
+    },
+    {
+      slug: "bridal-bouquet",
+      title: "Bridal Bouquet",
+      image: "/ashleyrounds_big.jpg",
+      category: "Bouquets",
+      date: "November 2023",
+      description:
+        "A cascading bridal bouquet of garden roses, sweet peas, and trailing ivy — designed to complement a modern ballroom wedding.",
+    },
+    {
+      slug: "floral-installation",
+      title: "Grand Floral Installation",
+      image: "/alejandro-big.jpg",
+      category: "Installations",
+      date: "October 2023",
+      description:
+        "A statement ceiling installation using thousands of blooms — suspended amaranthus, blush peonies, and hanging wisteria — for a grand gala entrance.",
+    },
+  ],
 };
 
 // #5755ff
