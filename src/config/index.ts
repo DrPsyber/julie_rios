@@ -33,16 +33,16 @@ export const SITE_CONTENT: SiteContent = {
       "Floral designer based in Dallas, Texas. Specializing in floral arrangements from small bouquets to grand floral scenes.",
     email: "roundsashley@gmail.com",
   },
-  experience: [
-    {
-      company: "Ashley Rounds Designs",
-      position: "Designer",
-      startDate: "January 2003",
-      endDate: "Present",
-      summary: [
-        "My experience will be described here in the near future",
-      ],
-    },
+  // experience: [
+  //   {
+  //     company: "Ashley Rounds Designs",
+  //     position: "Designer",
+  //     startDate: "January 2003",
+  //     endDate: "Present",
+  //     summary: [
+  //       "My experience will be described here in the near future",
+  //     ],
+  //   },
     // {
     //   company: "Zalmart",
     //   position: "Lead Android Developer",
@@ -72,8 +72,8 @@ export const SITE_CONTENT: SiteContent = {
     //   summary:
     //     "Developed and integrated a real-time vehicle tracking system using WebSockets, improving accuracy and data update in the application. This functionality increased user satisfaction by 30% and reduced customer service inquiries by 25%.",
     // },
-  ],
-  projects: [
+  // ],
+  // projects: [
     // {
     //   name: "Spotifu Music",
     //   summary: "A music streaming app that emulates Spotify's core features.",
@@ -95,7 +95,7 @@ export const SITE_CONTENT: SiteContent = {
     //   linkSource: "https://github.com/immois/astro-zen",
     //   image: "/clone-ig.png",
     // },
-  ],
+  // ],
   about: {
     description: `
       Hi, I’m Ashley Rounds, a passionate floral designer with a knack for crafting beautiful floral arrangements. 
