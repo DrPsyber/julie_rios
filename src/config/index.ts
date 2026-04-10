@@ -27,13 +27,13 @@ import { PHOTOS } from "./photos";
 
 export const SITE_CONTENT: SiteContent = {
   hero: {
-  "name": "Ashley Rounds (Modified)",
-  "specialty": "",
-  "summary": "",
-  "email": "ashley@example.com"
+  "name": "Ashley Rounds",
+  "specialty": "Designer",
+  "summary": "Floral designer based in Dallas, Texas. Specializing in floral arrangements from small bouquets to grand floral scenes.",
+  "email": "roundsashley@gmail.com"
 },
   about: {
-  "description": "Default description",
+  "description": "Hi, I’m Ashley Rounds, a passionate floral designer with a knack for crafting beautiful floral arrangements.",
   "image": "/ashleyrounds_big.jpg"
 },
   photos: PHOTOS,
