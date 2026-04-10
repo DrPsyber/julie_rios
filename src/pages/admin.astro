@@ -1,0 +1,361 @@
+---
+import { SITE_CONTENT } from "@config";
+import Layout from "@layouts/Layout.astro";
+import AdminGalleryItem from "@components/AdminGalleryItem.astro";
+
+import "../styles/global.css";
+
+const { hero, about, photos } = SITE_CONTENT;
+
+// Sort photos by category or index for easier editing
+const categories = [...new Set(photos.map((p) => p.category).filter(Boolean))];
+---
+
+<Layout title="Control Panel | Ashley Rounds">
+  <main class="min-h-screen bg-[#050505] text-white py-12 px-6">
+    <div class="max-w-[1600px] mx-auto">
+      <!-- Header -->
+      <header class="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
+        <div>
+          <h1 class="font-serif text-4xl md:text-6xl font-bold tracking-tight bg-gradient-to-r from-white to-neutral-500 bg-clip-text text-transparent">
+            Control Panel
+          </h1>
+          <p class="text-neutral-400 mt-2 text-lg">Manage your site content and photo gallery.</p>
+        </div>
+        <div class="flex gap-4">
+          <button 
+            id="save-btn" 
+            class="px-8 py-3 bg-primary text-white font-semibold rounded-full hover:bg-primary/80 transition-all shadow-lg shadow-primary/20 active:scale-95 flex items-center gap-2 group"
+          >
+            <span class="save-text">Save Changes</span>
+            <span class="loading-spinner hidden animate-spin">
+              <svg class="h-5 w-5" viewBox="0 0 24 24">
+                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none"></circle>
+                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              </svg>
+            </span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Tabs -->
+      <div class="mb-8 border-b border-neutral/10">
+        <ul class="flex gap-8 overflow-x-auto pb-px" id="admin-tabs">
+          <li class="shrink-0">
+            <button data-tab="content" class="tab-btn active border-b-2 border-primary pb-4 text-sm font-medium transition-all text-primary">Main Page Content</button>
+          </li>
+          <li class="shrink-0">
+            <button data-tab="gallery" class="tab-btn border-b-2 border-transparent pb-4 text-sm font-medium transition-all text-neutral hover:text-white">Gallery Editor</button>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Tab Content: Main Page -->
+      <section id="tab-content-content" class="tab-pane active space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-500">
+        <div class="grid grid-cols-1 gap-12">
+          <!-- Hero Section -->
+          <div class="space-y-6">
+            <div class="flex items-center gap-3 mb-2">
+              <div class="h-10 w-1 bg-primary"></div>
+              <h2 class="text-2xl font-serif font-bold italic">Hero Section</h2>
+            </div>
+            
+            <div class="space-y-4 bg-white/5 border border-white/10 rounded-2xl p-6 backdrop-blur-md">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="space-y-1.5">
+                  <label class="text-[10px] uppercase tracking-wider text-neutral-500 font-bold">Name</label>
+                  <input type="text" id="hero-name" value={hero.name} class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/60 focus:outline-none transition-all" />
+                </div>
+                <div class="space-y-1.5">
+                  <label class="text-[10px] uppercase tracking-wider text-neutral-500 font-bold">Specialty</label>
+                  <input type="text" id="hero-specialty" value={hero.specialty} class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/60 focus:outline-none transition-all" />
+                </div>
+              </div>
+              <div class="space-y-1.5">
+                  <label class="text-[10px] uppercase tracking-wider text-neutral-500 font-bold">Summary</label>
+                  <textarea id="hero-summary" rows="3" class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/60 focus:outline-none transition-all resize-none">{hero.summary}</textarea>
+              </div>
+              <div class="space-y-1.5">
+                  <label class="text-[10px] uppercase tracking-wider text-neutral-500 font-bold">Email</label>
+                  <input type="email" id="hero-email" value={hero.email} class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/60 focus:outline-none transition-all" />
+              </div>
+            </div>
+          </div>
+
+          <!-- About Section -->
+          <div class="space-y-6">
+            <div class="flex items-center gap-3 mb-2">
+              <div class="h-10 w-1 bg-primary"></div>
+              <h2 class="text-2xl font-serif font-bold italic">About Section</h2>
+            </div>
+            
+            <div class="space-y-4 bg-white/5 border border-white/10 rounded-2xl p-6 backdrop-blur-md">
+              <div class="space-y-1.5">
+                  <label class="text-[10px] uppercase tracking-wider text-neutral-500 font-bold">Description</label>
+                  <textarea id="about-description" rows="6" class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/60 focus:outline-none transition-all resize-none">{about.description.trim()}</textarea>
+              </div>
+              <div class="space-y-1.5">
+                  <label class="text-[10px] uppercase tracking-wider text-neutral-500 font-bold">About Image Path</label>
+                  <input type="text" id="about-image" value={about.image} class="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 text-white focus:border-primary/60 focus:outline-none transition-all" />
+                  <p class="text-[10px] text-neutral-500 mt-1 italic">Relative to public folder, e.g., /ashleyrounds_big.jpg</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Tab Content: Gallery -->
+      <section id="tab-content-gallery" class="tab-pane hidden space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
+        <div class="flex flex-col md:flex-row items-center justify-between gap-4 sticky top-4 z-10 bg-[#050505]/80 backdrop-blur-lg p-4 rounded-2xl border border-white/5 shadow-2xl">
+          <div class="flex items-center gap-3">
+            <div class="h-8 w-1 bg-primary"></div>
+            <h2 class="text-xl font-serif font-bold">Gallery Editor</h2>
+            <span class="text-xs text-neutral-500 ml-2">{photos.length} photos</span>
+          </div>
+          
+          <div class="flex flex-wrap gap-2" id="admin-filter-container">
+            <button data-filter="all" class="admin-filter-btn active rounded-full border border-primary bg-primary/20 px-4 py-1.5 text-xs font-medium text-primary transition-all">All</button>
+            {categories.map((cat) => (
+              <button data-filter={cat} class="admin-filter-btn rounded-full border border-neutral/30 px-4 py-1.5 text-xs font-medium text-neutral transition-all hover:border-neutral/50 hover:text-white">{cat}</button>
+            ))}
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6" id="admin-gallery-grid">
+          {photos.map((photo, i) => (
+            <div data-category={photo.category} class="gallery-editor-item" draggable="true">
+              <AdminGalleryItem photo={photo} index={i} />
+            </div>
+          ))}
+        </div>
+      </section>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-8 right-8 scale-90 opacity-0 transition-all duration-300 pointer-events-none group">
+        <div class="bg-white text-black px-6 py-4 rounded-2xl shadow-2xl flex items-center gap-4">
+            <div class="h-2 w-2 rounded-full bg-primary animate-pulse"></div>
+            <p class="text-sm font-bold tracking-tight" id="toast-message">Changes saved successfully!</p>
+        </div>
+    </div>
+  </main>
+
+  <style>
+    @reference "../styles/global.css";
+
+    .tab-btn.active {
+      @apply text-primary border-primary;
+    }
+    .admin-filter-btn.active {
+      @apply border-primary bg-primary/20 text-primary;
+    }
+    .loading-spinner svg {
+      @apply inline-block;
+    }
+  </style>
+
+  <script>
+    // Tab switching logic
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const tabPanes = document.querySelectorAll('.tab-pane');
+
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const tab = btn.getAttribute('data-tab');
+        
+        tabBtns.forEach(b => {
+          b.classList.remove('active', 'border-primary', 'text-primary');
+          b.classList.add('border-transparent', 'text-neutral');
+        });
+        btn.classList.add('active', 'border-primary', 'text-primary');
+        btn.classList.remove('border-transparent', 'text-neutral');
+
+        tabPanes.forEach(p => p.classList.add('hidden'));
+        document.getElementById(`tab-content-${tab}`)?.classList.remove('hidden');
+      });
+    });
+
+    // Filtering & Gallery Logic
+    const filterBtns = document.querySelectorAll('.admin-filter-btn');
+    const galleryItems = document.querySelectorAll('.gallery-editor-item') as NodeListOf<HTMLElement>;
+    const galleryGrid = document.getElementById('admin-gallery-grid');
+    let draggedItem: HTMLElement | null = null;
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const filter = btn.getAttribute('data-filter');
+        
+        filterBtns.forEach(b => {
+          b.classList.remove('active', 'border-primary', 'bg-primary/20', 'text-primary', 'font-bold');
+          b.classList.add('border-neutral/30', 'text-neutral');
+        });
+        btn.classList.add('active', 'border-primary', 'bg-primary/20', 'text-primary', 'font-bold');
+        btn.classList.remove('border-neutral/30', 'text-neutral');
+
+        galleryItems.forEach(item => {
+          const category = item.getAttribute('data-category');
+          if (filter === 'all' || category === filter) {
+            item.style.display = '';
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // Drag and Drop Logic
+    galleryItems.forEach(item => {
+      item.addEventListener('dragstart', (e) => {
+        draggedItem = item;
+        item.classList.add('opacity-40');
+        if (e.dataTransfer) {
+          e.dataTransfer.effectAllowed = 'move';
+        }
+      });
+
+      item.addEventListener('dragend', () => {
+        draggedItem = null;
+        galleryItems.forEach(i => i.classList.remove('opacity-40', 'scale-105', 'border-primary', 'hover:scale-105', 'z-20'));
+      });
+
+      item.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        if (e.dataTransfer) {
+          e.dataTransfer.dropEffect = 'move';
+        }
+        if (item !== draggedItem) {
+          item.classList.add('border-primary', 'scale-105', 'z-20');
+        }
+      });
+
+      item.addEventListener('dragleave', () => {
+        item.classList.remove('border-primary', 'scale-105', 'z-20');
+      });
+
+      item.addEventListener('drop', (e) => {
+        e.preventDefault();
+        item.classList.remove('border-primary', 'scale-105', 'z-20');
+        
+        if (draggedItem && draggedItem !== item && galleryGrid) {
+          const targetIndexInput = item.querySelector('.photo-index') as HTMLInputElement;
+          const draggedIndexInput = draggedItem.querySelector('.photo-index') as HTMLInputElement;
+          
+          if (targetIndexInput && draggedIndexInput) {
+            // Swap indices
+            const tempIndex = targetIndexInput.value;
+            targetIndexInput.value = draggedIndexInput.value;
+            draggedIndexInput.value = tempIndex;
+            
+            // Swap DOM elements
+            const allItems = Array.from(galleryGrid.children);
+            const draggedPos = allItems.indexOf(draggedItem);
+            const targetPos = allItems.indexOf(item);
+            
+            if (draggedPos < targetPos) {
+              item.after(draggedItem);
+            } else {
+              item.before(draggedItem);
+            }
+          }
+        }
+      });
+    });
+
+    // Save logic
+    const saveBtn = document.getElementById('save-btn');
+    const toast = document.getElementById('toast');
+    const toastMsg = document.getElementById('toast-message');
+
+    function showToast(message: string, isError = false) {
+        if (!toast || !toastMsg) return;
+        toastMsg.innerText = message;
+        toast.classList.remove('opacity-0', 'scale-90', 'translate-y-4');
+        toast.classList.add('opacity-100', 'scale-100', 'translate-y-0');
+        
+        setTimeout(() => {
+            toast.classList.add('opacity-0', 'scale-90', 'translate-y-4');
+            toast.classList.remove('opacity-100', 'scale-100', 'translate-y-0');
+        }, 3000);
+    }
+
+    saveBtn?.addEventListener('click', async () => {
+      saveBtn.classList.add('pointer-events-none', 'opacity-80');
+      saveBtn.querySelector('.save-text')?.classList.add('hidden');
+      saveBtn.querySelector('.loading-spinner')?.classList.remove('hidden');
+
+      try {
+        // Collect Main Content
+        const hero = {
+          name: (document.getElementById('hero-name') as HTMLInputElement).value,
+          specialty: (document.getElementById('hero-specialty') as HTMLInputElement).value,
+          summary: (document.getElementById('hero-summary') as HTMLTextAreaElement).value,
+          email: (document.getElementById('hero-email') as HTMLInputElement).value,
+        };
+
+        const about = {
+          description: (document.getElementById('about-description') as HTMLTextAreaElement).value,
+          image: (document.getElementById('about-image') as HTMLInputElement).value,
+        };
+
+        // Collect Gallery Data
+        // We need to keep other photo fields like slug, title, image, category, date, description
+        // because we're only editing featured and index here.
+        // We'll get the original photos and update only what changed.
+        
+        // This is a bit tricky in pure JS without a state manager, 
+        // but we can pull from the DOM and initial data.
+        // Actually, it's safer to send EVERYTHING back.
+        
+        const photoItems = document.querySelectorAll('[data-photo-item]');
+        const photosData = Array.from(photoItems).map(item => {
+            const slug = item.getAttribute('data-slug');
+            const featured = (item.querySelector('.photo-featured') as HTMLInputElement).checked;
+            const indexValue = parseInt((item.querySelector('.photo-index') as HTMLInputElement).value);
+            
+            return {
+                slug,
+                featured,
+                index: indexValue
+            };
+        });
+
+        // We still need the other fields for the final save. 
+        // We'll use the initial SITE_CONTENT.photos but override featured/index
+        // Note: SITE_CONTENT is available in the script via global window or similar? 
+        // No, it's not. Let's pass it via a data attribute or global variable.
+        
+        // Let's use a simpler approach: get the original data we printed to the page.
+        // I'll add a script tag that exposes the data.
+        const originalPhotos = (window as any).INITIAL_PHOTOS;
+        const updatedPhotos = originalPhotos.map((p: any) => {
+            const update = photosData.find(u => u.slug === p.slug);
+            return update ? { ...p, featured: update.featured, index: update.index } : p;
+        }).sort((a: any, b: any) => (a.index || 0) - (b.index || 0));
+
+        const response = await fetch('/api/admin/save', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ hero, about, photos: updatedPhotos }),
+        });
+
+        const result = await response.json();
+        if (result.success) {
+          showToast("Changes saved successfully!");
+        } else {
+          showToast(`Error: ${result.error}`, true);
+        }
+      } catch (e) {
+        showToast(`Save failed: ${(e as Error).message}`, true);
+      } finally {
+        saveBtn.classList.remove('pointer-events-none', 'opacity-80');
+        saveBtn.querySelector('.save-text')?.classList.remove('hidden');
+        saveBtn.querySelector('.loading-spinner')?.classList.add('hidden');
+      }
+    });
+  </script>
+
+  <!-- Pass data to client-side script -->
+  <script is:inline define:vars={{ photos }}>
+    window.INITIAL_PHOTOS = photos;
+  </script>
+</Layout>

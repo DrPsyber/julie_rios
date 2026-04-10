@@ -6,14 +6,20 @@ import { SITE_CONFIG } from "@config";
 import Footer from "@components/Footer.astro";
 
 interface Props {
+  title?: string;
+  description?: string;
   wide?: boolean;
 }
 
-const { wide = false } = Astro.props;
+const { 
+  title: propTitle, 
+  description: propDescription, 
+  wide = false 
+} = Astro.props;
 
 const {
-  title,
-  description,
+  title: defaultTitle,
+  description: defaultDescription,
   siteLogo,
   navLinks,
   lang,
@@ -22,6 +28,9 @@ const {
   socialImage,
   canonicalURL = new URL(Astro.url.pathname, Astro.site).href,
 } = SITE_CONFIG;
+
+const title = propTitle || defaultTitle;
+const description = propDescription || defaultDescription;
 
 const ogImgUrl = canonicalURL + socialImage;
 ---
