@@ -40,11 +40,20 @@ const categories = [...new Set(photos.map((p) => p.category).filter(Boolean))];
       </h1>
       {
         categories.length > 0 && (
-          <div class="mt-6 flex flex-wrap gap-2">
+          <div class="mt-6 flex flex-wrap gap-2" id="filter-container">
+            <button
+              data-filter="all"
+              class="filter-btn active rounded-full border border-primary bg-primary/20 px-3 py-1 text-xs font-medium text-primary transition-all hover:bg-primary/30 cursor-pointer"
+            >
+              All
+            </button>
             {categories.map((cat) => (
-              <span class="rounded-full border border-neutral/30 px-3 py-1 text-xs font-medium text-neutral">
+              <button
+                data-filter={cat}
+                class="filter-btn rounded-full border border-neutral/30 px-3 py-1 text-xs font-medium text-neutral transition-all hover:border-neutral/50 hover:text-white cursor-pointer"
+              >
                 {cat}
-              </span>
+              </button>
             ))}
           </div>
         )
@@ -54,3 +63,32 @@ const categories = [...new Set(photos.map((p) => p.category).filter(Boolean))];
     <GalleryGrid photos={photos} />
   </section>
 </Layout>
+
+<script>
+  const filterButtons = document.querySelectorAll('.filter-btn');
+  const galleryItems = document.querySelectorAll('[data-category]');
+
+  filterButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const filter = button.getAttribute('data-filter');
+
+      // Update active button state
+      filterButtons.forEach(btn => {
+        btn.classList.remove('active', 'border-primary', 'bg-primary/20', 'text-primary');
+        btn.classList.add('border-neutral/30', 'text-neutral');
+      });
+      button.classList.add('active', 'border-primary', 'bg-primary/20', 'text-primary');
+      button.classList.remove('border-neutral/30', 'text-neutral');
+
+      // Filter gallery items
+      galleryItems.forEach(item => {
+        const itemCategory = item.getAttribute('data-category');
+        if (filter === 'all' || itemCategory === filter) {
+          (item as HTMLElement).style.display = '';
+        } else {
+          (item as HTMLElement).style.display = 'none';
+        }
+      });
+    });
+  });
+</script>
