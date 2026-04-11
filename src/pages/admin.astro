@@ -11,9 +11,9 @@ const { hero, about, photos } = SITE_CONTENT;
 const categories = [...new Set(photos.map((p) => p.category).filter(Boolean))];
 ---
 
-<Layout title="Control Panel | Ashley Rounds">
-  <main class="min-h-screen bg-[#050505] text-white py-12 px-6">
-    <div class="max-w-[1600px] mx-auto">
+<Layout title="Control Panel | Ashley Rounds" wide={true}>
+  <div class="min-h-screen text-white py-12">
+    <div class="w-full mx-auto">
       <!-- Header -->
       <header class="mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div>
@@ -115,6 +115,7 @@ const categories = [...new Set(photos.map((p) => p.category).filter(Boolean))];
           
           <div class="flex flex-wrap gap-2" id="admin-filter-container">
             <button data-filter="all" class="admin-filter-btn active rounded-full border border-primary bg-primary/20 px-4 py-1.5 text-xs font-medium text-primary transition-all">All</button>
+            <button data-filter="featured" class="admin-filter-btn rounded-full border border-neutral/30 px-4 py-1.5 text-xs font-medium text-neutral transition-all hover:border-neutral/50 hover:text-white">Featured</button>
             {categories.map((cat) => (
               <button data-filter={cat} class="admin-filter-btn rounded-full border border-neutral/30 px-4 py-1.5 text-xs font-medium text-neutral transition-all hover:border-neutral/50 hover:text-white">{cat}</button>
             ))}
@@ -138,7 +139,7 @@ const categories = [...new Set(photos.map((p) => p.category).filter(Boolean))];
             <p class="text-sm font-bold tracking-tight" id="toast-message">Changes saved successfully!</p>
         </div>
     </div>
-  </main>
+  </div>
 
   <style>
     @reference "../styles/global.css";
@@ -194,7 +195,13 @@ const categories = [...new Set(photos.map((p) => p.category).filter(Boolean))];
 
         galleryItems.forEach(item => {
           const category = item.getAttribute('data-category');
-          if (filter === 'all' || category === filter) {
+          const isFeatured = (item.querySelector('.photo-featured') as HTMLInputElement)?.checked;
+          
+          if (filter === 'all') {
+            item.style.display = '';
+          } else if (filter === 'featured') {
+            item.style.display = isFeatured ? '' : 'none';
+          } else if (category === filter) {
             item.style.display = '';
           } else {
             item.style.display = 'none';
@@ -203,8 +210,23 @@ const categories = [...new Set(photos.map((p) => p.category).filter(Boolean))];
       });
     });
 
-    // Drag and Drop Logic
+    // Drag and Drop & Featured Checkbox Logic
     galleryItems.forEach(item => {
+      const checkbox = item.querySelector('.photo-featured') as HTMLInputElement;
+      const indexContainer = item.querySelector('.index-container');
+      
+      if (checkbox && indexContainer) {
+        checkbox.addEventListener('change', (e) => {
+          if ((e.target as HTMLInputElement).checked) {
+            indexContainer.classList.remove('opacity-30', 'pointer-events-none');
+            indexContainer.classList.add('opacity-100');
+          } else {
+            indexContainer.classList.add('opacity-30', 'pointer-events-none');
+            indexContainer.classList.remove('opacity-100');
+          }
+        });
+      }
+
       item.addEventListener('dragstart', (e) => {
         draggedItem = item;
         item.classList.add('opacity-40');

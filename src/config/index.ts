@@ -7,7 +7,7 @@ export const SITE_CONFIG: SiteConfig = {
   description:
     "Floral designer based in Dallas, Texas. Specializing in floral arrangements from small bouquets to grand floral scenes.",
   lang: "en",
-  siteLogo: "/ashleyrounds_big.jpg",
+  siteLogo: "/ashleyrounds_big.jpeg",
   navLinks: [
     { text: "Gallery", href: "/gallery" },
     { text: "About", href: "#about" },
@@ -29,12 +29,12 @@ export const SITE_CONTENT: SiteContent = {
   hero: {
   "name": "Ashley Rounds",
   "specialty": "Designer",
-  "summary": "Floral designer based in Dallas, Texas. Specializing in floral arrangements from small bouquets to grand floral scenes.",
+  "summary": "Prolific floral designer based in Dallas, Texas. ",
   "email": "roundsashley@gmail.com"
 },
   about: {
-  "description": "Hi, I’m Ashley Rounds, a passionate floral designer with a knack for crafting beautiful floral arrangements.",
-  "image": "/ashleyrounds_big.jpg"
+  "description": "Hi, I'm Ashley, a passionate designer with a knack for crafting beautiful scenes. ",
+  "image": "/ashleyrounds_big.jpeg"
 },
   photos: PHOTOS,
 };

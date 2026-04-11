@@ -47,6 +47,12 @@ const categories = [...new Set(photos.map((p) => p.category).filter(Boolean))];
             >
               All
             </button>
+            <button
+              data-filter="featured"
+              class="filter-btn rounded-full border border-neutral/30 px-3 py-1 text-xs font-medium text-neutral transition-all hover:border-neutral/50 hover:text-white cursor-pointer"
+            >
+              Featured
+            </button>
             {categories.map((cat) => (
               <button
                 data-filter={cat}
@@ -83,7 +89,13 @@ const categories = [...new Set(photos.map((p) => p.category).filter(Boolean))];
       // Filter gallery items
       galleryItems.forEach(item => {
         const itemCategory = item.getAttribute('data-category');
-        if (filter === 'all' || itemCategory === filter) {
+        const isFeatured = item.getAttribute('data-featured') === 'true';
+
+        if (filter === 'all') {
+          (item as HTMLElement).style.display = '';
+        } else if (filter === 'featured') {
+          (item as HTMLElement).style.display = isFeatured ? '' : 'none';
+        } else if (itemCategory === filter) {
           (item as HTMLElement).style.display = '';
         } else {
           (item as HTMLElement).style.display = 'none';

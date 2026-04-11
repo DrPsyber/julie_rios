@@ -2,19 +2,19 @@ import type { PhotoProps } from "../types";
 
 export const PHOTOS: PhotoProps[] = [
   {
-    "slug": "2026-04-art-colorful-gallery-wall",
-    "title": "Colorful Gallery Wall",
-    "image": "/2026-04-Art Colorful Gallery Wall.jpeg",
-    "category": "Art",
+    "slug": "2026-04-floral-woman-holding-flower-bouquet",
+    "title": "Woman Holding Flower Bouquet",
+    "image": "/2026-04-Floral-Woman Holding Flower Bouquet.jpeg",
+    "category": "Floral",
     "date": "2026-04",
-    "featured": false,
+    "featured": true,
     "index": 1
   },
   {
-    "slug": "2026-04-art-horse-portrait-with-flowers",
-    "title": "Horse Portrait With Flowers",
-    "image": "/2026-04-Art Horse Portrait With Flowers.jpeg",
-    "category": "Art",
+    "slug": "2026-04-floral-star-shaped-floral-arrangement",
+    "title": "Star Shaped Floral Arrangement",
+    "image": "/2026-04-Floral-Star Shaped Floral Arrangement.jpeg",
+    "category": "Floral",
     "date": "2026-04",
     "featured": false,
     "index": 2
@@ -214,7 +214,7 @@ export const PHOTOS: PhotoProps[] = [
     "image": "/2026-04-Decor-Fireplace Floral Arrangement.jpeg",
     "category": "Decor",
     "date": "2026-04",
-    "featured": false,
+    "featured": true,
     "index": 24
   },
   {
@@ -241,7 +241,7 @@ export const PHOTOS: PhotoProps[] = [
     "image": "/2026-04-Decor-Floral Arrangement on Glass Table.jpeg",
     "category": "Decor",
     "date": "2026-04",
-    "featured": false,
+    "featured": true,
     "index": 27
   },
   {
@@ -421,7 +421,7 @@ export const PHOTOS: PhotoProps[] = [
     "image": "/2026-04-Decor-Tropical Flower Arrangement.jpeg",
     "category": "Decor",
     "date": "2026-04",
-    "featured": false,
+    "featured": true,
     "index": 47
   },
   {
@@ -439,7 +439,7 @@ export const PHOTOS: PhotoProps[] = [
     "image": "/2026-04-Decor-White Floral Chandelier.jpeg",
     "category": "Decor",
     "date": "2026-04",
-    "featured": false,
+    "featured": true,
     "index": 49
   },
   {
@@ -448,7 +448,7 @@ export const PHOTOS: PhotoProps[] = [
     "image": "/2026-04-Decor-White Flower Tree.jpeg",
     "category": "Decor",
     "date": "2026-04",
-    "featured": false,
+    "featured": true,
     "index": 50
   },
   {
@@ -548,7 +548,7 @@ export const PHOTOS: PhotoProps[] = [
     "category": "Event",
     "date": "2026-04",
     "featured": false,
-    "index": 61
+    "index": 60
   },
   {
     "slug": "2026-04-event-elegant-floral-centerpieces",
@@ -683,7 +683,7 @@ export const PHOTOS: PhotoProps[] = [
     "category": "Event",
     "date": "2026-04",
     "featured": false,
-    "index": 76
+    "index": 75
   },
   {
     "slug": "2026-04-event-tall-floral-table-centerpiece",
@@ -764,7 +764,7 @@ export const PHOTOS: PhotoProps[] = [
     "category": "Floral",
     "date": "2026-04",
     "featured": false,
-    "index": 85
+    "index": 84
   },
   {
     "slug": "2026-04-floral-colorful-flower-arrangement-in-vase",
@@ -800,7 +800,7 @@ export const PHOTOS: PhotoProps[] = [
     "category": "Floral",
     "date": "2026-04",
     "featured": false,
-    "index": 89
+    "index": 88
   },
   {
     "slug": "2026-04-floral-colorful-flower-bouquet",
@@ -827,7 +827,7 @@ export const PHOTOS: PhotoProps[] = [
     "category": "Floral",
     "date": "2026-04",
     "featured": false,
-    "index": 92
+    "index": 91
   },
   {
     "slug": "2026-04-floral-colorful-mixed-bouquet",
@@ -845,7 +845,7 @@ export const PHOTOS: PhotoProps[] = [
     "category": "Floral",
     "date": "2026-04",
     "featured": false,
-    "index": 94
+    "index": 93
   },
   {
     "slug": "2026-04-floral-colorful-mixed-flower-bouquet",
@@ -863,7 +863,7 @@ export const PHOTOS: PhotoProps[] = [
     "category": "Floral",
     "date": "2026-04",
     "featured": false,
-    "index": 96
+    "index": 95
   },
   {
     "slug": "2026-04-floral-colorful-mixed-flower-bouquet",
@@ -872,7 +872,7 @@ export const PHOTOS: PhotoProps[] = [
     "category": "Floral",
     "date": "2026-04",
     "featured": false,
-    "index": 97
+    "index": 95
   },
   {
     "slug": "2026-04-floral-colorful-table-arrangements",
@@ -962,7 +962,7 @@ export const PHOTOS: PhotoProps[] = [
     "category": "Floral",
     "date": "2026-04",
     "featured": false,
-    "index": 107
+    "index": 106
   },
   {
     "slug": "2026-04-floral-peach-rose-bouquet",
@@ -1010,10 +1010,10 @@ export const PHOTOS: PhotoProps[] = [
     "index": 112
   },
   {
-    "slug": "2026-04-floral-star-shaped-floral-arrangement",
-    "title": "Star Shaped Floral Arrangement",
-    "image": "/2026-04-Floral-Star Shaped Floral Arrangement.jpeg",
-    "category": "Floral",
+    "slug": "2026-04-art-colorful-gallery-wall",
+    "title": "Colorful Gallery Wall",
+    "image": "/2026-04-Art Colorful Gallery Wall.jpeg",
+    "category": "Art",
     "date": "2026-04",
     "featured": false,
     "index": 113
@@ -1052,7 +1052,7 @@ export const PHOTOS: PhotoProps[] = [
     "category": "Floral",
     "date": "2026-04",
     "featured": false,
-    "index": 117
+    "index": 116
   },
   {
     "slug": "2026-04-floral-white-flower-arrangement",
@@ -1070,7 +1070,7 @@ export const PHOTOS: PhotoProps[] = [
     "category": "Floral",
     "date": "2026-04",
     "featured": false,
-    "index": 119
+    "index": 118
   },
   {
     "slug": "2026-04-floral-white-lilies-by-pool",
@@ -1109,10 +1109,10 @@ export const PHOTOS: PhotoProps[] = [
     "index": 123
   },
   {
-    "slug": "2026-04-floral-woman-holding-flower-bouquet",
-    "title": "Woman Holding Flower Bouquet",
-    "image": "/2026-04-Floral-Woman Holding Flower Bouquet.jpeg",
-    "category": "Floral",
+    "slug": "2026-04-art-horse-portrait-with-flowers",
+    "title": "Horse Portrait With Flowers",
+    "image": "/2026-04-Art Horse Portrait With Flowers.jpeg",
+    "category": "Art",
     "date": "2026-04",
     "featured": false,
     "index": 124
@@ -1186,7 +1186,7 @@ export const PHOTOS: PhotoProps[] = [
     "image": "/2026-04-Wedding-Bride Bouquet Closeup.jpeg",
     "category": "Wedding",
     "date": "2026-04",
-    "featured": false,
+    "featured": true,
     "index": 132
   },
   {
@@ -1204,7 +1204,7 @@ export const PHOTOS: PhotoProps[] = [
     "image": "/2026-04-Wedding-Bride Holding Colorful Bouquet.jpeg",
     "category": "Wedding",
     "date": "2026-04",
-    "featured": false,
+    "featured": true,
     "index": 134
   },
   {
@@ -1217,9 +1217,9 @@ export const PHOTOS: PhotoProps[] = [
     "index": 135
   },
   {
-    "slug": "2026-04-wedding-church-aisle-decorations",
-    "title": "Church Aisle Decorations",
-    "image": "/2026-04-Wedding-Church Aisle Decorations.jpeg",
+    "slug": "2026-04-wedding-floral-staircase-decoration",
+    "title": "Floral Staircase Decoration",
+    "image": "/2026-04-Wedding-Floral Staircase Decoration.jpeg",
     "category": "Wedding",
     "date": "2026-04",
     "featured": false,
@@ -1231,16 +1231,16 @@ export const PHOTOS: PhotoProps[] = [
     "image": "/2026-04-Wedding-Elegant Floral Decor.jpeg",
     "category": "Wedding",
     "date": "2026-04",
-    "featured": false,
+    "featured": true,
     "index": 137
   },
   {
-    "slug": "2026-04-wedding-floral-staircase-decoration",
-    "title": "Floral Staircase Decoration",
-    "image": "/2026-04-Wedding-Floral Staircase Decoration.jpeg",
+    "slug": "2026-04-wedding-church-aisle-decorations",
+    "title": "Church Aisle Decorations",
+    "image": "/2026-04-Wedding-Church Aisle Decorations.jpeg",
     "category": "Wedding",
     "date": "2026-04",
-    "featured": false,
+    "featured": true,
     "index": 138
   },
   {
@@ -1258,7 +1258,7 @@ export const PHOTOS: PhotoProps[] = [
     "image": "/2026-04-Wedding-Tree Decorated With Flowers.jpeg",
     "category": "Wedding",
     "date": "2026-04",
-    "featured": false,
+    "featured": true,
     "index": 140
   },
   {

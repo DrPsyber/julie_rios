@@ -50,7 +50,7 @@ const { photo, index: arrayIndex } = Astro.props;
         <span class="text-xs font-medium text-neutral group-hover/label:text-white transition-colors">Featured</span>
       </label>
 
-      <div class="flex items-center gap-2">
+      <div class={`flex items-center gap-2 transition-opacity duration-300 index-container ${photo.featured ? 'opacity-100' : 'opacity-30 pointer-events-none'}`}>
         <label class="text-[10px] text-neutral/60 font-medium">Index</label>
         <input 
           type="number" 

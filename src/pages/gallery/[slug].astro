@@ -17,14 +17,16 @@ export function getStaticPaths() {
   }));
 }
 
-interface Props {
-  photo: PhotoProps;
-  index: number;
-  total: number;
+const { slug } = Astro.params;
+const photos = SITE_CONTENT.photos;
+const index = photos.findIndex((p) => p.slug === slug);
+const photo = photos[index];
+const total = photos.length;
+
+if (!photo) {
+  return Astro.redirect("/gallery");
 }
 
-const { photo, index, total } = Astro.props;
-const photos = SITE_CONTENT.photos;
 const prevPhoto = index > 0 ? photos[index - 1] : null;
 const nextPhoto = index < total - 1 ? photos[index + 1] : null;
 ---

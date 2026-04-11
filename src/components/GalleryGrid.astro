@@ -15,7 +15,7 @@ const { photos } = Astro.props;
 >
   {
     photos.map((photo) => (
-      <li data-category={photo.category}>
+      <li data-category={photo.category} data-featured={photo.featured ? "true" : "false"}>
         <a
           href={`/gallery/${photo.slug}`}
           class="group relative block overflow-hidden rounded-xl border border-neutral/20 bg-black transition-all duration-300 hover:border-primary/40 hover:shadow-lg hover:shadow-primary/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
