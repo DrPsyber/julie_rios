@@ -32,7 +32,7 @@ export const SITE_CONTENT: SiteContent = {
   "email": "roundsashley@gmail.com"
 },
   about: {
-  "description": "Hi, I'm Ashley, a passionate designer with a knack for crafting beautiful scenes. ",
+  "description": "Hi, I’m Ashley Rounds, a freelance floral designer who turns flowers into art. With a sharp eye for design and a deep love for botanicals, I create arrangements that are anything but ordinary. ",
   "image": "/ashleyrounds_big.jpeg"
 },
   photos: PHOTOS,
