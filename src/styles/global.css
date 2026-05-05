@@ -1,46 +1,56 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Be Vietnam Pro", system-ui, sans-serif;
-  --font-serif: "Gabarito Variable", ui-serif, serif;
+  --font-display: "Playfair Display", "Cormorant Garamond", ui-serif, serif;
+  --font-body: "EB Garamond", "Iowan Old Style", "Apple Garamond", Georgia, serif;
+  --font-script: "Caveat", cursive;
+  --font-serif: var(--font-display);
+  --font-sans: var(--font-body);
 
-  --color-primary: #2563eb;
-  --color-neutral: #94a3b8;
-  --color-white: #e2e8f0;
-  --color-black: #0e141b;
+  --color-primary: #a89878;
+  --color-accent: #c5b791;
+  --color-neutral: #a8a098;
+  --color-white: #f3ede3;
+  --color-black: #15110d;
+  --color-ink: #1c1812;
 
-  --text-xs: 0.875rem;
-  --text-xs--line-height: 1.125rem;
-  --text-sm: 1rem;
-  --text-sm--line-height: 1.25rem;
-  --text-base: 1.125rem;
-  --text-base--line-height: 1.625rem;
+  --text-xs: 0.75rem;
+  --text-xs--line-height: 1.1rem;
+  --text-sm: 0.875rem;
+  --text-sm--line-height: 1.4rem;
+  --text-base: 1.0625rem;
+  --text-base--line-height: 1.7rem;
   --text-lg: 1.25rem;
-  --text-lg--line-height: 1.75rem;
+  --text-lg--line-height: 1.85rem;
   --text-xl: 1.5rem;
-  --text-xl--line-height: 1.813rem;
-  --text-2xl: 1.75rem;
-  --text-2xl--line-height: 2.125rem;
-  --text-3xl: 2rem;
-  --text-3xl--line-height: 2.375rem;
-  --text-4xl: 2.25rem;
-  --text-4xl--line-height: 2.688rem;
-  --text-5xl: 2.5rem;
-  --text-5xl--line-height: 3rem;
-  --text-6xl: 3rem;
-  --text-6xl--line-height: 3.625rem;
-  --text-7xl: 3.75rem;
+  --text-xl--line-height: 2rem;
+  --text-2xl: 1.875rem;
+  --text-2xl--line-height: 2.4rem;
+  --text-3xl: 2.25rem;
+  --text-3xl--line-height: 2.75rem;
+  --text-4xl: 2.75rem;
+  --text-4xl--line-height: 3.1rem;
+  --text-5xl: 3.5rem;
+  --text-5xl--line-height: 1.05;
+  --text-6xl: 4.5rem;
+  --text-6xl--line-height: 1.02;
+  --text-7xl: 5.5rem;
   --text-7xl--line-height: 1;
-  --text-8xl: 4.5rem;
-  --text-8xl--line-height: 4.875rem;
-  --text-9xl: 6rem;
-  --text-9xl--line-height: 6.625rem;
+  --text-8xl: 7rem;
+  --text-8xl--line-height: 0.95;
+  --text-9xl: 9rem;
+  --text-9xl--line-height: 0.9;
 
-  --tracking-tightest: -2px;
-  --tracking-tighter: -1px;
-  --tracking-tight: -0.25px;
+  --tracking-tightest: -0.04em;
+  --tracking-tighter: -0.02em;
+  --tracking-tight: -0.01em;
+  --tracking-wide: 0.06em;
+  --tracking-wider: 0.18em;
+  --tracking-widest: 0.32em;
 
   --animate-slide-in: slide-in 600ms ease both;
+  --animate-letter-rise: letter-rise 1100ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  --animate-fade-up: fade-up 900ms cubic-bezier(0.2, 0.7, 0.2, 1) both;
 
   @keyframes slide-in {
     10% {
@@ -49,5 +59,39 @@
     100% {
       transform: translateY(0);
     }
+  }
+
+  @keyframes letter-rise {
+    from {
+      opacity: 0;
+      transform: translateY(0.6em);
+      filter: blur(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+      filter: blur(0);
+    }
+  }
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(28px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+@layer base {
+  html {
+    font-feature-settings: "liga", "kern", "onum", "dlig";
+  }
+  ::selection {
+    background: var(--color-primary);
+    color: var(--color-black);
   }
 }

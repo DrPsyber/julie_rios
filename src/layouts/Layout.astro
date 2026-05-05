@@ -1,7 +1,5 @@
 ---
 import Header from "@components/Header.astro";
-import "@fontsource/be-vietnam-pro";
-import "@fontsource-variable/gabarito";
 import { SITE_CONFIG } from "@config";
 import Footer from "@components/Footer.astro";
 
@@ -56,10 +54,15 @@ const ogImgUrl = canonicalURL + socialImage;
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={ogImgUrl} />
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,700;0,800;0,900;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
   </head>
 
-  <body class="bg-black font-sans">
+  <body class="bg-black font-body text-white">
     <Header siteLogo={siteLogo} navLinks={navLinks} />
     <main class={`mx-auto ${wide ? "max-w-5xl" : "max-w-3xl"} px-5`}>
       <slot />

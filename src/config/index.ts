@@ -10,7 +10,6 @@ export const SITE_CONFIG: SiteConfig = {
   siteLogo: "/ashleyrounds_big.jpeg",
   navLinks: [
     { text: "Gallery", href: "/gallery" },
-    { text: "About", href: "#about" },
   ],
   socialLinks: [
     // { text: "Twitter", href: "https://github.com/immois/astro-zen" },

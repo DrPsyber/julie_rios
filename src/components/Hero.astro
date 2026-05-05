@@ -2,26 +2,49 @@
 import type { HeroProps } from "@types";
 type Props = HeroProps;
 
-const { name, specialty, summary, email } = Astro.props;
+const { specialty, summary, email } = Astro.props;
 ---
 
-<section class="py-24 md:py-32" id="#hero">
-  <h1
-    class="mb-1.5 font-serif text-7xl font-bold tracking-tightest text-white sm:text-8xl md:mb-0 md:text-9xl"
+<section
+  id="#hero"
+  class="reveal-section py-32 md:py-40"
+>
+  <div class="mb-20 flex items-baseline gap-6 text-white/60">
+    <span
+      class="font-script text-2xl leading-none text-primary"
+      aria-hidden="true">—</span
+    >
+    <span
+      class="font-display text-xs tracking-[0.32em] uppercase text-white/55"
+    >
+      Atelier
+    </span>
+  </div>
+
+  <h2
+    class="mb-12 font-display italic text-[clamp(3rem,11vw,8.5rem)] leading-[0.92] tracking-tightest text-white"
   >
-    {name}
-  </h1>
+    {specialty}.
+  </h2>
+
   <p
-    class="mb-9 font-serif text-4xl leading-[46px] font-bold tracking-tighter text-primary sm:text-5xl md:text-6xl"
+    class="mb-16 max-w-xl font-body text-xl leading-[1.7] text-white/75 md:text-[1.4rem] md:leading-[1.6]"
   >
-    {specialty}
-  </p>
-  <p class="mb-16 text-base font-normal text-neutral md:text-lg">
     {summary}
   </p>
 
   <a
-    class="inline-block rounded-full bg-primary px-8 py-5 text-sm leading-5 font-medium text-[#fff]"
-    href={`mailto:${email}`}>Get in Touch</a
+    class="group inline-flex items-baseline gap-3 font-display text-xs tracking-widest uppercase text-white transition-colors hover:text-primary"
+    href={`mailto:${email}`}
   >
+    <span class="relative">
+      Inquire
+      <span
+        class="absolute -bottom-1 left-0 h-px w-full origin-left scale-x-100 bg-current transition-transform duration-500 group-hover:scale-x-50"
+      ></span>
+    </span>
+    <span class="font-body text-base normal-case tracking-normal italic text-white/60 group-hover:text-primary"
+      >{email}</span
+    >
+  </a>
 </section>

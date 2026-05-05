@@ -1,30 +1,27 @@
 ---
 import Menu from "@icons/Menu.astro";
-import { Image } from "astro:assets";
 import type { HeaderProps } from "@types";
 
 type Props = HeaderProps;
 
-const { siteLogo, navLinks } = Astro.props;
+const { navLinks } = Astro.props;
 ---
 
 <header
-  class="sticky top-0 z-50 mx-auto flex max-w-5xl animate-slide-in justify-between bg-black px-5 py-6"
+  class="fixed inset-x-0 top-0 z-50 flex items-center justify-between px-6 py-6 text-white sm:px-10"
 >
-  <a href="/" aria-label="Home link">
-    <Image
-      class="rounded-full"
-      src={siteLogo}
-      width="45"
-      height="45"
-      alt="website logo"
-    />
+  <a
+    href="/"
+    aria-label="Home"
+    class="font-display text-xs tracking-widest uppercase text-white/85 transition-colors hover:text-white"
+  >
+    A · R
   </a>
 
   <button
     type="button"
     id="menu-button"
-    class="px-1.5 text-neutral sm:hidden"
+    class="px-1.5 text-white/80 sm:hidden"
     aria-expanded="false"
     aria-controls="main-menu"
   >
@@ -32,15 +29,15 @@ const { siteLogo, navLinks } = Astro.props;
   </button>
 
   <nav
-    class="absolute top-20 right-5 hidden rounded-xl border border-neutral/40 bg-black px-4 py-5 text-neutral sm:static sm:block sm:border-0 sm:bg-transparent sm:p-0"
+    class="absolute top-16 right-6 hidden rounded-sm border border-white/10 bg-black/60 px-5 py-4 text-white/85 backdrop-blur-md sm:static sm:block sm:border-0 sm:bg-transparent sm:p-0 sm:backdrop-blur-none"
     id="main-menu"
   >
-    <ul class="gap-2 sm:flex">
+    <ul class="gap-10 sm:flex">
       {
         navLinks.map((link) => (
-          <li class="relative">
+          <li>
             <a
-              class={`nav-item relative block p-2 text-sm font-medium transition-all duration-500 after:absolute after:bottom-0 after:left-2/4 after:h-2 after:w-1 after:-translate-x-2/4 after:text-primary after:opacity-0 after:content-['•'] hover:text-white`}
+              class="nav-item block py-1 font-display text-xs tracking-widest uppercase text-white/75 transition-colors hover:text-white"
               href={link.href}
             >
               {link.text}
@@ -53,7 +50,6 @@ const { siteLogo, navLinks } = Astro.props;
 </header>
 
 <script>
-  // Toggle mobile menu
   const button = document.querySelector("#menu-button");
   const menu = document.querySelector("#main-menu");
   const navItems = document.querySelectorAll("#main-menu > ul > li > a");
@@ -68,44 +64,4 @@ const { siteLogo, navLinks } = Astro.props;
   navItems.forEach((item) => {
     item?.addEventListener("click", toggleMenu);
   });
-
-  // Update navigation based on scroll position with Intersection Observer
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          navItems.forEach((item) => {
-            if (item.getAttribute("href") === `#${entry.target.id}`) {
-              item.classList.add("text-white", "md:after:opacity-100");
-            } else {
-              item.classList.remove("text-white", "md:after:opacity-100");
-            }
-          });
-        }
-      });
-    },
-    { threshold: 0.5 },
-  );
-
-  document.querySelectorAll("section").forEach((section) => {
-    observer.observe(section);
-  });
-
-  // Cleanup observer
-  document.onvisibilitychange = () => {
-    if (document.visibilityState === "hidden") {
-      observer.disconnect();
-    } else {
-      document.querySelectorAll("section").forEach((section) => {
-        observer.observe(section);
-      });
-    }
-  };
 </script>
-
-<style>
-  header {
-    animation-timeline: scroll();
-    animation-range: 0 650px;
-  }
-</style>

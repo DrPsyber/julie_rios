@@ -8,94 +8,92 @@ interface Props {
 }
 
 const { photos } = Astro.props;
-
-const extendedPhotos = [photos[photos.length - 1], ...photos, photos[0]];
 ---
 
 <div
-  class="carousel-root fixed inset-0 -z-20 overflow-hidden"
+  class="carousel-root fixed inset-0 z-0 overflow-hidden"
   id="carousel"
-  data-total-original={photos.length}
+  data-total={photos.length}
   aria-hidden="true"
 >
-  <div class="carousel-track flex h-full w-full" id="carousel-track">
-    {
-      extendedPhotos.map((photo) => (
-        <div class="carousel-slide relative h-full w-full shrink-0">
-          <Image
-            src={photo.image}
-            alt=""
-            width={2400}
-            height={1600}
-            class="h-full w-full object-cover"
-            loading="eager"
-          />
-        </div>
-      ))
-    }
-  </div>
+  {
+    photos.map((photo, i) => (
+      <div
+        class:list={[
+          "carousel-slide absolute inset-0",
+          i === 0 ? "is-active" : "",
+        ]}
+        data-index={i}
+        style={`--zoom-delay: -${(i * 4) % 20}s`}
+      >
+        <Image
+          src={photo.image}
+          alt=""
+          width={2400}
+          height={1600}
+          class="h-full w-full object-cover"
+          loading={i === 0 ? "eager" : "lazy"}
+        />
+      </div>
+    ))
+  }
 </div>
 
 <style>
-  .carousel-track {
-    -webkit-mask-image: linear-gradient(
-      to right,
-      transparent 0%,
-      black 8%,
-      black 92%,
-      transparent 100%
-    );
-    mask-image: linear-gradient(
-      to right,
-      transparent 0%,
-      black 8%,
-      black 92%,
-      transparent 100%
-    );
-    will-change: transform;
+  .carousel-root {
+    -webkit-mask-image:
+      linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%),
+      linear-gradient(to bottom, transparent 0%, black 8%, black 92%, transparent 100%);
+    -webkit-mask-composite: source-in;
+    mask-image:
+      linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%),
+      linear-gradient(to bottom, transparent 0%, black 8%, black 92%, transparent 100%);
+    mask-composite: intersect;
+  }
+
+  .carousel-slide {
+    opacity: 0;
+    transition: opacity 1500ms ease-in-out;
+    will-change: opacity;
+  }
+
+  .carousel-slide.is-active {
+    opacity: 1;
+  }
+
+  .carousel-slide :global(img) {
+    animation: slow-zoom 20s ease-in-out infinite alternate;
+    animation-delay: var(--zoom-delay, 0s);
+    transform-origin: center;
+  }
+
+  @keyframes slow-zoom {
+    from {
+      transform: scale(1);
+    }
+    to {
+      transform: scale(1.12);
+    }
   }
 </style>
 
 <script>
-  const track = document.getElementById("carousel-track") as HTMLElement;
   const carousel = document.getElementById("carousel") as HTMLElement;
-  const originalLength = Number(carousel.dataset.totalOriginal) || 0;
+  const slides = Array.from(
+    carousel.querySelectorAll<HTMLElement>(".carousel-slide"),
+  );
+  const total = slides.length;
 
-  let current = 1;
-  let isMoving = false;
+  let current = 0;
 
-  function goTo(index: number, immediate = false) {
-    if (isMoving && !immediate) return;
-    current = index;
-
-    if (immediate) {
-      track.style.transition = "none";
-    } else {
-      track.style.transition = "transform 1500ms ease-in-out";
-      isMoving = true;
-    }
-
-    track.style.transform = `translateX(${-current * 100}%)`;
-
-    if (!immediate) {
-      window.setTimeout(() => {
-        if (current >= originalLength + 1) {
-          goTo(1, true);
-        } else if (current < 1) {
-          goTo(originalLength, true);
-        }
-        isMoving = false;
-      }, 1500);
-    }
+  function activate(next: number) {
+    const prev = current;
+    current = (next + total) % total;
+    slides[prev].classList.remove("is-active");
+    slides[current].classList.add("is-active");
   }
 
-  goTo(current, true);
-
   window.setInterval(() => {
-    if (!isMoving) goTo(current + 1);
+    activate(current + 1);
   }, 6000);
-
-  window.addEventListener("resize", () => {
-    goTo(current, true);
-  });
 </script>

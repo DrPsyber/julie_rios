@@ -1,5 +1,4 @@
 ---
-import Section from "./Section.astro";
 import { Image } from "astro:assets";
 import type { AboutProps, HeroProps } from "@types";
 
@@ -8,19 +7,50 @@ type Props = AboutProps & Pick<HeroProps, "name">;
 const { description, image, name } = Astro.props;
 ---
 
-<Section text="About Me" href="about">
-  <div class="flex flex-col items-center gap-12 md:flex-row md:gap-8">
-    <p class="w-auto text-base text-neutral md:pr-5">{description}</p>
-    <div
-      class="h-80 w-64 flex-shrink-0 rotate-[5deg] bg-white p-4 md:rotate-[7deg]"
+<section
+  id="about"
+  class="reveal-section py-32 md:py-40"
+>
+  <div class="mb-20 flex items-baseline gap-6">
+    <span
+      class="font-display text-xs tracking-[0.32em] uppercase text-white/55"
     >
-      <Image
-        class="object-cover"
-        src={image}
-        width="260"
-        height="260"
-        alt={name}
-      />
-    </div>
+      No. 02 — About
+    </span>
   </div>
-</Section>
+
+  <div class="grid gap-16 md:grid-cols-12 md:gap-12">
+    <div class="md:col-span-7">
+      <h2
+        class="mb-10 font-display text-[clamp(2.5rem,7vw,5rem)] leading-[1.05] tracking-tight text-white"
+      >
+        A studio for <em class="text-primary">unhurried</em> florals.
+      </h2>
+      <p
+        class="font-body text-xl leading-[1.7] text-white/75 md:text-[1.4rem] md:leading-[1.6]"
+      >
+        {description}
+      </p>
+      <p
+        class="mt-10 font-script text-3xl leading-none text-primary"
+        aria-hidden="true"
+      >
+        — by Ashley
+      </p>
+    </div>
+
+    <figure class="relative md:col-span-5 md:mt-12">
+      <div
+        class="relative aspect-[4/5] w-full overflow-hidden bg-ink ring-1 ring-white/10"
+      >
+        <Image
+          class="h-full w-full object-cover"
+          src={image}
+          width="520"
+          height="650"
+          alt={name}
+        />
+      </div>
+    </figure>
+  </div>
+</section>
