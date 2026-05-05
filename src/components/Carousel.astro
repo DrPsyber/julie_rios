@@ -7,250 +7,95 @@ interface Props {
   items_per_slide?: number;
 }
 
-const { photos, items_per_slide = 7 } = Astro.props;
+const { photos } = Astro.props;
 
-// Create extended photos array for continuous loop
-// We add clones of the last items at the beginning and clones of the first items at the end
-const extendedPhotos = [
-  ...photos.slice(-items_per_slide),
-  ...photos,
-  ...photos.slice(0, items_per_slide),
-];
-
-// Generate random tilts for each photo (between 1 and 10 degrees, random direction)
-const tilts = extendedPhotos.map(
-  () => (Math.random() > 0.5 ? 1 : -1) * (Math.random() * 9 + 1),
-);
+const extendedPhotos = [photos[photos.length - 1], ...photos, photos[0]];
 ---
 
 <div
-  class="relative"
+  class="carousel-root fixed inset-0 -z-20 overflow-hidden"
   id="carousel"
-  data-items-per-slide={items_per_slide}
   data-total-original={photos.length}
-  aria-roledescription="carousel"
-  aria-label="Photo gallery carousel"
+  aria-hidden="true"
 >
-  <!-- Track -->
-  <div
-    class="flex transition-transform duration-700 ease-in-out py-20"
-    id="carousel-track"
-    aria-live="polite"
-  >
+  <div class="carousel-track flex h-full w-full" id="carousel-track">
     {
-      extendedPhotos.map((photo, i) => (
-        <div
-          class="carousel-slide relative shrink-0 transition-all duration-700 ease-in-out"
-          style={`width: ${100 / items_per_slide}%`}
-          role="group"
-          data-tilt={tilts[i]}
-          aria-roledescription="slide"
-          aria-label={`${(i % photos.length) + 1} of ${photos.length}: ${photo.title}`}
-        >
-          <a
-            href={`/gallery/${photo.slug}`}
-            tabindex="-1"
-            class="carousel-content block transition-all duration-700 ease-in-out origin-center bg-white p-4 pb-20 shadow-2xl rounded-sm max-w-lg mx-auto"
-          >
-            <div class="relative overflow-hidden aspect-square bg-neutral-100">
-              <Image
-                src={photo.image}
-                alt={photo.title}
-                width={400}
-                height={400}
-                class="h-full w-full object-cover"
-              />
-            </div>
-            <div class="absolute bottom-6 left-0 right-0 px-4 text-center">
-              <h3
-                class="text-2xl font-bold text-neutral-800 tracking-tight"
-                style="font-family: 'Caveat', cursive;"
-              >
-                {photo.title}
-              </h3>
-            </div>
-          </a>
+      extendedPhotos.map((photo) => (
+        <div class="carousel-slide relative h-full w-full shrink-0">
+          <Image
+            src={photo.image}
+            alt=""
+            width={2400}
+            height={1600}
+            class="h-full w-full object-cover"
+            loading="eager"
+          />
         </div>
       ))
     }
   </div>
-
-  <!-- Prev button -->
-  <button
-    type="button"
-    id="carousel-prev"
-    class="absolute left-3 top-1/2 -translate-y-1/2 z-30 rounded-full bg-black/50 p-2 text-white transition-colors hover:bg-black/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-    aria-label="Previous photo"
-  >
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="20"
-      height="20"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      aria-hidden="true"
-    >
-      <path d="m15 18-6-6 6-6"></path>
-    </svg>
-  </button>
-
-  <!-- Next button -->
-  <button
-    type="button"
-    id="carousel-next"
-    class="absolute right-3 top-1/2 -translate-y-1/2 z-30 rounded-full bg-black/50 p-2 text-white transition-colors hover:bg-black/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
-    aria-label="Next photo"
-  >
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="20"
-      height="20"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
-      aria-hidden="true"
-    >
-      <path d="m9 18 6-6-6-6"></path>
-    </svg>
-  </button>
 </div>
+
+<style>
+  .carousel-track {
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black 8%,
+      black 92%,
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      black 8%,
+      black 92%,
+      transparent 100%
+    );
+    will-change: transform;
+  }
+</style>
 
 <script>
   const track = document.getElementById("carousel-track") as HTMLElement;
-  const slides = track.querySelectorAll(".carousel-slide");
-  const prevBtn = document.getElementById("carousel-prev") as HTMLButtonElement;
-  const nextBtn = document.getElementById("carousel-next") as HTMLButtonElement;
   const carousel = document.getElementById("carousel") as HTMLElement;
-
-  const itemsPerSlide = Number(carousel.dataset.itemsPerSlide) || 1;
   const originalLength = Number(carousel.dataset.totalOriginal) || 0;
 
-  // We start at the first original item (after the first set of clones)
-  let current = itemsPerSlide;
+  let current = 1;
   let isMoving = false;
-  let autoplayTimer: ReturnType<typeof setInterval> | undefined;
-
-  function updateSlideStyles() {
-    slides.forEach((slide, i) => {
-      const slideEl = slide as HTMLElement;
-      const content = slideEl.querySelector(".carousel-content") as HTMLElement;
-      const link = slideEl.querySelector("a") as HTMLAnchorElement;
-
-      // Calculate distance from currently selected slide
-      const distance = Math.abs(i - current);
-      const isActive = i === current;
-
-      const tilt = slideEl.dataset.tilt;
-
-      if (isActive) {
-        content.style.transform = "scale(1) rotate(0deg)";
-        slideEl.style.opacity = "1";
-        slideEl.style.zIndex = "20";
-        slideEl.classList.remove("pointer-events-none");
-        link.setAttribute("tabindex", "0");
-      } else {
-        content.style.transform = `scale(0.8) rotate(${tilt}deg)`;
-
-        // Decrease opacity symmetrically as it gets further from the selected slide
-        const opacity = Math.max(0.1, 1 - distance * 0.15);
-        slideEl.style.opacity = String(opacity);
-        slideEl.style.zIndex = String(10 - distance);
-        slideEl.classList.add("pointer-events-none");
-        link.setAttribute("tabindex", "-1");
-      }
-    });
-  }
 
   function goTo(index: number, immediate = false) {
     if (isMoving && !immediate) return;
-    
     current = index;
 
     if (immediate) {
       track.style.transition = "none";
     } else {
-      track.style.transition = "transform 0.7s ease-in-out";
+      track.style.transition = "transform 1500ms ease-in-out";
       isMoving = true;
     }
 
-    // Center the active slide
-    const slideWidthPercent = 100 / itemsPerSlide;
-    const centerOffset = (itemsPerSlide - 1) / 2;
-    const targetTranslate = -(current - centerOffset) * slideWidthPercent;
-    
-    track.style.transform = `translateX(${targetTranslate}%)`;
-    
-    updateSlideStyles();
+    track.style.transform = `translateX(${-current * 100}%)`;
 
     if (!immediate) {
-      // Handle the "jump" for continuous loop after transition
-      setTimeout(() => {
-        if (current >= originalLength + itemsPerSlide) {
-          goTo(current - originalLength, true);
-        } else if (current < itemsPerSlide) {
-          goTo(current + originalLength, true);
+      window.setTimeout(() => {
+        if (current >= originalLength + 1) {
+          goTo(1, true);
+        } else if (current < 1) {
+          goTo(originalLength, true);
         }
         isMoving = false;
-      }, 700);
+      }, 1500);
     }
   }
 
-  // Initial call to set styles
   goTo(current, true);
 
-  function startAutoplay() {
-    stopAutoplay();
-    autoplayTimer = setInterval(() => {
-      if (!isMoving) goTo(current + 1);
-    }, 4000);
-  }
+  window.setInterval(() => {
+    if (!isMoving) goTo(current + 1);
+  }, 6000);
 
-  function stopAutoplay() {
-    if (autoplayTimer) {
-      clearInterval(autoplayTimer);
-      autoplayTimer = undefined;
-    }
-  }
-
-  prevBtn.addEventListener("click", () => {
-    stopAutoplay();
-    goTo(current - 1);
-    startAutoplay();
-  });
-
-  nextBtn.addEventListener("click", () => {
-    stopAutoplay();
-    goTo(current + 1);
-    startAutoplay();
-  });
-
-  carousel.addEventListener("mouseenter", stopAutoplay);
-  carousel.addEventListener("mouseleave", startAutoplay);
-
-  carousel.addEventListener("keydown", (e: KeyboardEvent) => {
-    if (e.key === "ArrowLeft") {
-      stopAutoplay();
-      goTo(current - 1);
-      startAutoplay();
-    } else if (e.key === "ArrowRight") {
-      stopAutoplay();
-      goTo(current + 1);
-      startAutoplay();
-    }
-  });
-
-  startAutoplay();
-
-  // Re-start autoplay when the window is resized to ensure correct positioning
   window.addEventListener("resize", () => {
     goTo(current, true);
   });
 </script>
-

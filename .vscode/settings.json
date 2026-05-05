@@ -1,0 +1,25 @@
+{
+    "piny.project_settings": {
+        "open-pages": [
+            "pinyfakepage.html"
+        ],
+        "tw-external-config": {},
+        "source-folders": null,
+        "preview-url": "http://localhost:4321",
+        "ai-project-brief": null,
+        "component-settings": {
+            "src/layouts/Layout.astro:::Temp": {
+                "route": null
+            }
+        },
+        "app-routes": {
+            "routes": [
+                "/",
+                "/admin",
+                "/api/admin/save",
+                "/gallery"
+            ],
+            "current_route": "/"
+        }
+    }
+}

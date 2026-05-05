@@ -10,23 +10,18 @@ import "../styles/global.css";
 ---
 
 <Layout>
-  <section id="gallery-preview" class="py-24">
-    <!-- <div class="mb-14 flex flex-wrap items-end justify-between gap-4">
-      <h2
-        class="font-serif text-4xl font-bold tracking-tighter text-white md:text-5xl"
-      >
-        Gallery
-      </h2>
-    </div> -->
-    <Carousel
-      photos={SITE_CONTENT.photos
-        .filter((photo) => photo.featured)
-        .sort((a, b) => (a.index ?? 0) - (b.index ?? 0))}
-      items_per_slide={2}
-    />
+  <Carousel
+    photos={SITE_CONTENT.photos
+      .filter((photo) => photo.featured)
+      .sort((a, b) => (a.index ?? 0) - (b.index ?? 0))}
+  />
+
+  <div class="dim-overlay fixed inset-0 -z-10 bg-black opacity-0" id="dim-overlay"></div>
+
+  <section class="open-hero relative flex h-screen items-end justify-center pb-12">
     <a
       href="/gallery"
-      class="flex items-center gap-1.5 text-sm text-neutral transition-colors hover:text-white"
+      class="flex items-center gap-1.5 text-sm text-white/80 transition-colors hover:text-white"
     >
       View All Photos
       <svg
@@ -45,7 +40,19 @@ import "../styles/global.css";
       </svg>
     </a>
   </section>
+
   <Hero {...SITE_CONTENT.hero} />
 
   <About {...SITE_CONTENT.about} name={SITE_CONTENT.hero.name} />
 </Layout>
+
+<script>
+  const overlay = document.getElementById("dim-overlay") as HTMLElement;
+  const updateDim = () => {
+    const ratio = window.scrollY / window.innerHeight;
+    overlay.style.opacity = String(Math.min(0.8, ratio * 0.8));
+  };
+  updateDim();
+  window.addEventListener("scroll", updateDim, { passive: true });
+  window.addEventListener("resize", updateDim);
+</script>

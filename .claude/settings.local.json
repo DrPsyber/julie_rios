@@ -1,3 +1,14 @@
 {
+  "permissions": {
+    "allow": [
+      "Bash(git -C /Users/zmetteer/GitHub/ashley_rounds add docs/superpowers/specs/2026-05-04-carousel-fullscreen-background-design.md)",
+      "Bash(git -C /Users/zmetteer/GitHub/ashley_rounds commit -m ' *)",
+      "Bash(pnpm dev *)",
+      "Bash(curl -sf -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:4321/ --max-time 5)",
+      "Bash(/Users/zmetteer/GitHub/ashley_rounds/node_modules/@esbuild/darwin-arm64/bin/esbuild --version)",
+      "Bash(pnpm exec *)",
+      "Bash(pnpm install *)"
+    ]
+  },
   "outputStyle": "default"
 }
