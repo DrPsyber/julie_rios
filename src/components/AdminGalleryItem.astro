@@ -47,7 +47,7 @@ const { photo, index: arrayIndex } = Astro.props;
             <div class="h-5 w-9 rounded-full bg-neutral/30 border border-neutral/20 transition-colors peer-checked:bg-primary/40 peer-checked:border-primary/60"></div>
             <div class="absolute left-1 top-1 h-3 w-3 rounded-full bg-white/80 transition-transform peer-checked:translate-x-4"></div>
         </div>
-        <span class="text-xs font-medium text-neutral group-hover/label:text-white transition-colors">Featured</span>
+        <span class="text-xs font-medium text-neutral group-hover/label:text-white transition-colors">{photo.featured ? 'Featured' : 'Not Featured'}</span>
       </label>
 
       <div class={`flex items-center gap-2 transition-opacity duration-300 index-container ${photo.featured ? 'opacity-100' : 'opacity-30 pointer-events-none'}`}>

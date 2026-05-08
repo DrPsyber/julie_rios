@@ -1,24 +1,24 @@
 {
   "permissions": {
     "allow": [
-      "Bash(git -C /Users/zmetteer/GitHub/ashley_rounds add docs/superpowers/specs/2026-05-04-carousel-fullscreen-background-design.md)",
-      "Bash(git -C /Users/zmetteer/GitHub/ashley_rounds commit -m ' *)",
+      "Bash(git -C ~/GitHub/julie_rios add docs/superpowers/specs/2026-05-04-carousel-fullscreen-background-design.md)",
+      "Bash(git -C ~/GitHub/julie_rios commit -m ' *)",
       "Bash(pnpm dev *)",
       "Bash(curl -sf -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:4321/ --max-time 5)",
-      "Bash(/Users/zmetteer/GitHub/ashley_rounds/node_modules/@esbuild/darwin-arm64/bin/esbuild --version)",
+      "Bash(~/GitHub/julie_rios/node_modules/@esbuild/darwin-arm64/bin/esbuild --version)",
       "Bash(pnpm exec *)",
       "Bash(pnpm install *)",
       "Bash(curl -s http://localhost:4321/)",
       "Bash(curl -sI \"http://localhost:4321/2026-04-Floral-Woman%20Holding%20Flower%20Bouquet.jpeg\")",
       "Bash(curl -s http://localhost:4321/src/styles/global.css)",
       "Bash(curl -sf -o /dev/null -w \"HTTP %{http_code}\\\\n\" http://localhost:4321/ --max-time 10)",
-      "Bash(git -C /Users/zmetteer/GitHub/ashley_rounds remote -v)",
-      "Bash(git -C /Users/zmetteer/GitHub/ashley_rounds status --short)",
-      "Bash(git -C /Users/zmetteer/GitHub/ashley_rounds diff --stat tsconfig.json .claude/settings.local.json)",
-      "Bash(git -C /Users/zmetteer/GitHub/ashley_rounds diff tsconfig.json)",
+      "Bash(git -C ~/GitHub/julie_rios remote -v)",
+      "Bash(git -C ~/GitHub/julie_rios status --short)",
+      "Bash(git -C ~/GitHub/julie_rios diff --stat tsconfig.json .claude/settings.local.json)",
+      "Bash(git -C ~/GitHub/julie_rios diff tsconfig.json)",
       "Bash(pnpm build *)",
-      "Bash(git -C /Users/zmetteer/GitHub/ashley_rounds add src/components/About.astro src/components/Carousel.astro src/components/Footer.astro src/components/Header.astro src/components/Hero.astro src/config/index.ts src/layouts/Layout.astro src/pages/index.astro src/styles/global.css)",
-      "Bash(git -C /Users/zmetteer/GitHub/ashley_rounds push origin main)",
+      "Bash(git -C ~/GitHub/julie_rios add src/components/About.astro src/components/Carousel.astro src/components/Footer.astro src/components/Header.astro src/components/Hero.astro src/config/index.ts src/layouts/Layout.astro src/pages/index.astro src/styles/global.css)",
+      "Bash(git -C ~/GitHub/julie_rios push origin main)",
       "Bash(vercel --prod --yes)",
       "Bash(pkill -f \"astro dev\")"
     ]

@@ -2,12 +2,12 @@ import type { SiteConfig, SiteContent } from "../types";
 
 
 export const SITE_CONFIG: SiteConfig = {
-  title: "Julie Rios - Designer",
+  title: "Julie Rios - Artist",
   author: "Julie Rios",
   description:
-    "Floral designer based in Dallas, Texas. Specializing in floral arrangements from small bouquets to grand floral scenes.",
+    "Artist based in Dallas, Texas. Specializing in unique style and vision laid down on canvas.",
   lang: "en",
-  siteLogo: "/ashleyrounds_big.jpeg",
+  siteLogo: "/julierios.jpeg",
   navLinks: [
     { text: "Gallery", href: "/gallery" },
   ],
@@ -27,13 +27,13 @@ import { PHOTOS } from "./photos";
 export const SITE_CONTENT: SiteContent = {
   hero: {
   "name": "Julie Rios",
-  "specialty": "Designer",
-  "summary": "Prolific floral designer based in Dallas, Texas. ",
-  "email": "roundsashley@gmail.com"
+  "specialty": "Artist",
+  "summary": "Unique style and vison laid down on canvas. Made in Dallas, Texas. ",
+  "email": "julie.rios@gmail.com"
 },
   about: {
-  "description": "Hi, I’m Julie Rios, a freelance floral designer who turns flowers into art. With a sharp eye for design and a deep love for botanicals, I create arrangements that are anything but ordinary. ",
-  "image": "/ashleyrounds_big.jpeg"
+  "description": "Hi, I’m Julie Rios, an artist who turns ideas into visual art. With a sharp eye for design and a deep love for creativity, I create pieces that are anything but ordinary. ",
+  "image": "/julierios.jpeg"
 },
   photos: PHOTOS,
 };
