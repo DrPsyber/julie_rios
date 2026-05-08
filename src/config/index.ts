@@ -2,8 +2,8 @@ import type { SiteConfig, SiteContent } from "../types";
 
 
 export const SITE_CONFIG: SiteConfig = {
-  title: "Ashley Rounds - Designer",
-  author: "Ashley Rounds",
+  title: "Julie Rios - Designer",
+  author: "Julie Rios",
   description:
     "Floral designer based in Dallas, Texas. Specializing in floral arrangements from small bouquets to grand floral scenes.",
   lang: "en",
@@ -26,13 +26,13 @@ import { PHOTOS } from "./photos";
 
 export const SITE_CONTENT: SiteContent = {
   hero: {
-  "name": "Ashley Rounds",
+  "name": "Julie Rios",
   "specialty": "Designer",
   "summary": "Prolific floral designer based in Dallas, Texas. ",
   "email": "roundsashley@gmail.com"
 },
   about: {
-  "description": "Hi, I’m Ashley Rounds, a freelance floral designer who turns flowers into art. With a sharp eye for design and a deep love for botanicals, I create arrangements that are anything but ordinary. ",
+  "description": "Hi, I’m Julie Rios, a freelance floral designer who turns flowers into art. With a sharp eye for design and a deep love for botanicals, I create arrangements that are anything but ordinary. ",
   "image": "/ashleyrounds_big.jpeg"
 },
   photos: PHOTOS,

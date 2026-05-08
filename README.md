@@ -1,6 +1,6 @@
-# `Ashley Rounds - Floral Designer` Website
+# `Julie Rios - Floral Designer` Website
 
-This is a website for Ashley Rounds, a floral designer based in Dallas, Texas. It is built with Astro and TailwindCSS.
+This is a website for Julie Rios, a floral designer based in Dallas, Texas. It is built with Astro and TailwindCSS.
 
 ![zen-og](/public/zen-og.jpeg)
 
