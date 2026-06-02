@@ -11,7 +11,7 @@ importers:
       '@astrojs/check':
         specifier: ^0.9.9
         version: 0.9.9(prettier-plugin-astro@0.14.1)(prettier@3.8.3)(typescript@5.9.3)
-      '@astrojs/vercel':
+      '@astrojs/node':
         specifier: ^9.0.0
         version: 9.0.5(astro@5.18.1(@types/node@24.10.1)(@vercel/functions@2.2.13)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.53.3)(typescript@5.9.3)(yaml@2.8.4))(rollup@4.53.3)
       '@fontsource-variable/gabarito':
@@ -83,7 +83,7 @@ packages:
     resolution: {integrity: sha512-UFBgfeldP06qu6khs/yY+q1cDAaArM2/7AEIqQ9Cuvf7B1hNLq0xDrZkct+QoIGyjq56y8IaE2I3CTvG99mlhQ==}
     engines: {node: 18.20.8 || ^20.3.0 || >=22.0.0}
 
-  '@astrojs/vercel@9.0.5':
+  '@astrojs/node@9.0.5':
     resolution: {integrity: sha512-rGuoVF/faLRcW1hE9Bu/DZPgaqk3TT6MzqiLsVemotecSSqZeSAh4+x7cNq7fLk75vS/dm14rO5V1lm+8Gp3dg==}
     peerDependencies:
       astro: ^5.0.0
